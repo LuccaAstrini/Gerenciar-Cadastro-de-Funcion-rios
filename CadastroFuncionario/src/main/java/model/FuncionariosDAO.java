@@ -41,17 +41,19 @@ public class FuncionariosDAO {
     }
     
      public Funcionario recupera(String codigo) throws FileNotFoundException{
-        FileReader arquivoIn = new FileReader("produtos.txt");
+        FileReader arquivoIn = new FileReader("funcionarios.txt");
         Scanner leitor = new Scanner(arquivoIn);
         
         //Procurar o código do produto através da leitura enquanto houver 
         while(leitor.hasNext()){
+             String nome = leitor.nextLine();
             String cod = leitor.nextLine();
-            String nome = leitor.nextLine();
-            double salario = leitor.nextDouble();
+            String salario = leitor.nextLine();
+            
+            System.out.println(codigo+"-"+cod);
             
             if(cod.equalsIgnoreCase(codigo)){
-                return new Funcionario(cod,nome,salario);
+                return new Funcionario(cod,nome,Double.parseDouble(salario));
             }
         }
         return null;

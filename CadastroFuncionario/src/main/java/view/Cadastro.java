@@ -176,10 +176,7 @@ public class Cadastro extends javax.swing.JFrame {
         //Leitura dos dados
         String cod = txtcod.getText();
         String nome = txtnome.getText();
-        Double salario = Double.parseDouble(txtsalario.getText());
-
-        Funcionario f = new Funcionario(cod, nome, salario);
-
+        Double salario = Double.valueOf(txtsalario.getText());
         try {
             new CadastroController().grava(cod, nome, salario);
         } catch (IOException ex) {
@@ -192,9 +189,9 @@ public class Cadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         try {
-            FuncionariosDAO dao = new FuncionariosDAO("produtos.txt");
+            FuncionariosDAO dao = new FuncionariosDAO("funcionarios.txt");
             //teste rapido
-            Funcionario fun = dao.recupera("40");
+            Funcionario fun = dao.recupera(txtcodbusca.getText());
 
             JOptionPane.showMessageDialog(null, fun == null ? "codigo inexistente" : fun);
         } catch (FileNotFoundException ex) {
