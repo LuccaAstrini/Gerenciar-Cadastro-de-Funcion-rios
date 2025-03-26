@@ -4,11 +4,13 @@
  */
 package view;
 
+import controller.CadastroController;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Funcionario;
+import model.FuncionariosDAO;
 
 /**
  *
@@ -171,33 +173,28 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void btnsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvarActionPerformed
         //Leitura dos dados
-        int cod = Integer.parseInt(txtcod.getText());
+        String cod = txtcod.getText();
         String nome = txtnome.getText();
         Double salario = Double.parseDouble(txtsalario.getText());
-        
+
         Funcionario f = new Funcionario(cod, nome, salario);
 
-//        try{;
-//            new ProdutoController().grava(cod, desc, Double.parseDouble(preco), Integer.parseInt(estoque));
-//            JOptionPane.showConfirmDialog(rootPane, "Cadastrou");
-//        }catch(IOException ex) {
-//            JOptionPane.showMessageDialog(rootPane, "erro ao cadastrar"+ex.getMessage());
-//            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        new CadastroController().grava(cod, nome, Double.parseDouble(salario));
+
     }//GEN-LAST:event_btnsalvarActionPerformed
 
     private void btnbuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscaActionPerformed
         // TODO add your handling code here:
-        
+
         try {
-            FuncionarioDAO dao = new FuncionarioDAO("produtos.txt");
+            FuncionariosDAO dao = new FuncionariosDAO("produtos.txt");
             //teste rapido
-            Cadastro cadastro = dao.recupera("40"); 
-            
-            JOptionPane.showMessageDialog(null, cad==null?"codigo inexistente": cad);
+            Funcionario fun = dao.recupera("40");
+
+            JOptionPane.showMessageDialog(null, fun == null ? "codigo inexistente" : fun);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Houve erro na leitura: "+ex.getMessage());
+            Logger.getLogger(FuncionariosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Houve erro na leitura: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnbuscaActionPerformed
 

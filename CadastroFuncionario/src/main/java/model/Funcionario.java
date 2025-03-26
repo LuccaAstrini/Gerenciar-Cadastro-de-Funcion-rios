@@ -1,19 +1,20 @@
 package model;
 
 public class Funcionario {
+
     private String nome;
-    private int codigo;
+    private String codigo;
     private double salario;
 
-    public Funcionario(int codigo, String nome, double salario) {
-        this.nome = nome;
+    public Funcionario(String codigo, String nome, double salario) {
         this.codigo = codigo;
+        this.nome = nome;
         this.salario = salario;
     }
 
     public Funcionario() {
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -22,11 +23,11 @@ public class Funcionario {
         this.nome = nome;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 

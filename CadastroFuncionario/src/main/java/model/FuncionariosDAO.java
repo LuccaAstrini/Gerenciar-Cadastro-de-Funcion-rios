@@ -4,9 +4,12 @@
  */
 package model;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 /**
  *
@@ -35,6 +38,23 @@ public class FuncionariosDAO {
         //fechar o arquivo
         out.close();
         arquivoSaida.close();
+    }
+    
+     public Funcionario recupera(String codigo) throws FileNotFoundException{
+        FileReader arquivoIn = new FileReader("produtos.txt");
+        Scanner leitor = new Scanner(arquivoIn);
+        
+        //Procurar o código do produto através da leitura enquanto houver 
+        while(leitor.hasNext()){
+            String cod = leitor.nextLine();
+            String nome = leitor.nextLine();
+            double salario = leitor.nextDouble();
+            
+            if(cod.equalsIgnoreCase(codigo)){
+                return new Funcionario(cod,nome,salario);
+            }
+        }
+        return null;
     }
     
 }
