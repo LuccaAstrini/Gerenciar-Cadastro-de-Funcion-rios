@@ -5,12 +5,12 @@
 package view;
 
 import controller.CadastroController;
-import java.awt.Frame;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Funcionario;
+import model.FuncionariosDAO;
 
 /**
  *
@@ -116,6 +116,11 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel4.setText("Código:");
 
         btnbusca.setText("Buscar");
+        btnbusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -168,16 +173,30 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void btnsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvarActionPerformed
         //Leitura dos dados
-        int cod = Integer.parseInt(txtcod.getText());
+        String cod = txtcod.getText();
         String nome = txtnome.getText();
-        Double salario = Double.valueOf(txtsalario.getText());
-        
-        try {
-            new CadastroController().grava(cod, nome, salario);
-        } catch (IOException ex) {
-            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Double salario = Double.parseDouble(txtsalario.getText());
+
+        Funcionario f = new Funcionario(cod, nome, salario);
+
+        new CadastroController().grava(cod, nome, Double.parseDouble(salario));
+
     }//GEN-LAST:event_btnsalvarActionPerformed
+
+    private void btnbuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscaActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            FuncionariosDAO dao = new FuncionariosDAO("produtos.txt");
+            //teste rapido
+            Funcionario fun = dao.recupera("40");
+
+            JOptionPane.showMessageDialog(null, fun == null ? "codigo inexistente" : fun);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FuncionariosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Houve erro na leitura: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnbuscaActionPerformed
 
     /**
      * @param args the command line arguments
