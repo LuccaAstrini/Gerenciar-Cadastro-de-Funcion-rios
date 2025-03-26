@@ -4,6 +4,8 @@
 
 package com.mycompany.cadastrofuncionario;
 
+import view.Cadastro;
+
 /**
  *
  * @author android
@@ -11,6 +13,8 @@ package com.mycompany.cadastrofuncionario;
 public class CadastroFuncionario {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Cadastro frame = new Cadastro();
+        
+        frame.setVisible(true);
     }
 }
