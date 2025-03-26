@@ -1,0 +1,4 @@
+Fazer um programa, usando mvc e DAO, para gerenciar o cadastro de Funcionários(nome, código, salário).
+Seu programa deve:
+1- ao iniciar ler todos os funcionários cadastrados em funcionários.txt
+2- buscar os dados de um funcionário, dado seu código
