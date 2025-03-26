@@ -5,7 +5,7 @@ import model.FuncionariosDAO;
 
 public class CadastroController {
 
-     public void grava(int cod, String nome, double salario) throws IOException{
+     public void grava(String cod, String nome, double salario) throws IOException{
         //Instanciar Produto
        Funcionario funcionario = new Funcionario(cod, nome, salario);
         new FuncionariosDAO("produtos.txt").grava(funcionario);

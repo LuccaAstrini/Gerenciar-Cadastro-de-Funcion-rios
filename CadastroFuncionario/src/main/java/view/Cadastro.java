@@ -6,6 +6,7 @@ package view;
 
 import controller.CadastroController;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -179,7 +180,11 @@ public class Cadastro extends javax.swing.JFrame {
 
         Funcionario f = new Funcionario(cod, nome, salario);
 
-        new CadastroController().grava(cod, nome, Double.parseDouble(salario));
+        try {
+            new CadastroController().grava(cod, nome, salario);
+        } catch (IOException ex) {
+            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_btnsalvarActionPerformed
 
