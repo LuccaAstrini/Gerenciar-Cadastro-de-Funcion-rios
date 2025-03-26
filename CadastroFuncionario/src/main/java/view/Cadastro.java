@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Funcionario;
 
 /**
  *
@@ -86,7 +87,7 @@ public class Cadastro extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(80, 80, 80)
                         .addComponent(btnsalvar)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,9 +167,11 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void btnsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvarActionPerformed
         //Leitura dos dados
-        String cod = txtcod.getText();
+        int cod = Integer.parseInt(txtcod.getText());
         String nome = txtnome.getText();
-        String salario = txtsalario.getText();
+        Double salario = Double.parseDouble(txtsalario.getText());
+        
+        Funcionario f = new Funcionario(cod, nome, salario);
 
 //        try{;
 //            new ProdutoController().grava(cod, desc, Double.parseDouble(preco), Integer.parseInt(estoque));
