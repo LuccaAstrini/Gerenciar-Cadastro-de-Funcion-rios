@@ -4,8 +4,7 @@
  */
 package view;
 
-import java.awt.Frame;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -115,6 +114,11 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel4.setText("Código:");
 
         btnbusca.setText("Buscar");
+        btnbusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -181,6 +185,21 @@ public class Cadastro extends javax.swing.JFrame {
 //            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }//GEN-LAST:event_btnsalvarActionPerformed
+
+    private void btnbuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscaActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+            FuncionarioDAO dao = new FuncionarioDAO("produtos.txt");
+            //teste rapido
+            Cadastro cadastro = dao.recupera("40"); 
+            
+            JOptionPane.showMessageDialog(null, cad==null?"codigo inexistente": cad);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Houve erro na leitura: "+ex.getMessage());
+        }
+    }//GEN-LAST:event_btnbuscaActionPerformed
 
     /**
      * @param args the command line arguments
