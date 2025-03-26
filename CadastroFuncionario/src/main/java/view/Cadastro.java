@@ -4,7 +4,9 @@
  */
 package view;
 
-import java.io.FileNotFoundException;
+import controller.CadastroController;
+import java.awt.Frame;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -114,11 +116,6 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel4.setText("Código:");
 
         btnbusca.setText("Buscar");
-        btnbusca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbuscaActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -173,33 +170,14 @@ public class Cadastro extends javax.swing.JFrame {
         //Leitura dos dados
         int cod = Integer.parseInt(txtcod.getText());
         String nome = txtnome.getText();
-        Double salario = Double.parseDouble(txtsalario.getText());
-        
-        Funcionario f = new Funcionario(cod, nome, salario);
-
-//        try{;
-//            new ProdutoController().grava(cod, desc, Double.parseDouble(preco), Integer.parseInt(estoque));
-//            JOptionPane.showConfirmDialog(rootPane, "Cadastrou");
-//        }catch(IOException ex) {
-//            JOptionPane.showMessageDialog(rootPane, "erro ao cadastrar"+ex.getMessage());
-//            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_btnsalvarActionPerformed
-
-    private void btnbuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscaActionPerformed
-        // TODO add your handling code here:
+        Double salario = Double.valueOf(txtsalario.getText());
         
         try {
-            FuncionarioDAO dao = new FuncionarioDAO("produtos.txt");
-            //teste rapido
-            Cadastro cadastro = dao.recupera("40"); 
-            
-            JOptionPane.showMessageDialog(null, cad==null?"codigo inexistente": cad);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Houve erro na leitura: "+ex.getMessage());
+            new CadastroController().grava(cod, nome, salario);
+        } catch (IOException ex) {
+            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnbuscaActionPerformed
+    }//GEN-LAST:event_btnsalvarActionPerformed
 
     /**
      * @param args the command line arguments
