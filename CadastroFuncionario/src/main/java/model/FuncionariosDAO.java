@@ -16,47 +16,47 @@ import java.util.Scanner;
  * @author android
  */
 public class FuncionariosDAO {
-    
+
     private String nomeArq = null;
-    
-    public FuncionariosDAO(String nomeArq){
+
+    public FuncionariosDAO(String nomeArq) {
         this.nomeArq = nomeArq;
-    } 
-    
-    public void grava(Funcionario funcionario) throws IOException{  
+    }
+
+    public void grava(Funcionario funcionario) throws IOException {
         FileWriter arquivoSaida; //objeto para o arquivo onde a escrita será realizada
-        
+
         PrintWriter out; //objeto para escrever
         //Instanciar as classes
-        arquivoSaida = new FileWriter(nomeArq); //abertura do arquivo
-        
+        arquivoSaida = new FileWriter(nomeArq, true); //abertura do arquivo
+
         out = new PrintWriter(arquivoSaida);
-        
+
         //gravar os dados no arquivo
         out.println(funcionario);
-        
+
         //fechar o arquivo
         out.close();
         arquivoSaida.close();
     }
-    
-     public Funcionario recupera(String codigo) throws FileNotFoundException{
+
+    public Funcionario recupera(String codigo) throws FileNotFoundException {
         FileReader arquivoIn = new FileReader("funcionarios.txt");
         Scanner leitor = new Scanner(arquivoIn);
-        
+
         //Procurar o código do produto através da leitura enquanto houver 
-        while(leitor.hasNext()){
-             String nome = leitor.nextLine();
+        while (leitor.hasNext()) {
+            String nome = leitor.nextLine();
             String cod = leitor.nextLine();
             String salario = leitor.nextLine();
-            
-            System.out.println(codigo+"-"+cod);
-            
-            if(cod.equalsIgnoreCase(codigo)){
-                return new Funcionario(cod,nome,Double.parseDouble(salario));
+
+            System.out.println(codigo + "-" + cod);
+
+            if (cod.equalsIgnoreCase(codigo)) {
+                return new Funcionario(cod, nome, Double.parseDouble(salario));
             }
         }
         return null;
     }
-    
+
 }
